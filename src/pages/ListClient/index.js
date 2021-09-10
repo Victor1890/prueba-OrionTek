@@ -15,50 +15,54 @@ const ListOrder = () => {
     console.log(clients);
   }, []);
 
-  return (
-    <div className='container-xl'>
-      <div className='table-responsive'>
-        <div className='table-wrapper'>
-          <div className='table-title'>
-            <div className='row'>
-              <div className='col-sm-6'>
-                <h2>
-                  <b>Listas de Clientes</b>
-                </h2>
-              </div>
-              <div className='col-sm-6'>
-                <a
-                  href='#addEmployeeModal'
-                  className='btn btn-success'
-                  data-toggle='modal'
-                  onClick={() => (document.location.href = "/add")}
-                >
-                  <AiFillFileAdd size={25} />
-                  <span>Agregar Cliente</span>
-                </a>
+  try {
+    return (
+      <div className='container-xl'>
+        <div className='table-responsive'>
+          <div className='table-wrapper'>
+            <div className='table-title'>
+              <div className='row'>
+                <div className='col-sm-6'>
+                  <h2>
+                    <b>Listas de Clientes</b>
+                  </h2>
+                </div>
+                <div className='col-sm-6'>
+                  <a
+                    href='#addEmployeeModal'
+                    className='btn btn-success'
+                    data-toggle='modal'
+                    onClick={() => (document.location.href = "/add")}
+                  >
+                    <AiFillFileAdd size={25} />
+                    <span>Agregar Cliente</span>
+                  </a>
+                </div>
               </div>
             </div>
+            <table className='table table-hover'>
+              <thead className='text-center'>
+                <tr>
+                  <th className='text-center'>Nombre</th>
+                  <th className='text-center'>Empresa</th>
+                  <th className='text-center'>Correos</th>
+                </tr>
+              </thead>
+              <tbody>
+                {clients !== null &&
+                  clients.map((client) => (
+                    <TableBody key={client.id} {...client} />
+                  ))}
+                {clients === null && <LoadSpinner />}
+              </tbody>
+            </table>
           </div>
-          <table className='table table-hover'>
-            <thead className='text-center'>
-              <tr>
-                <th className='text-center'>Nombre</th>
-                <th className='text-center'>Empresa</th>
-                <th className='text-center'>Correos</th>
-              </tr>
-            </thead>
-            <tbody>
-              {clients !== null &&
-                clients.map((client) => (
-                  <TableBody key={client.id} {...client} />
-                ))}
-              {clients === null && <LoadSpinner />}
-            </tbody>
-          </table>
         </div>
       </div>
-    </div>
-  );
+    );
+  } catch (error) {
+    window.location.reload(true);
+  }
 };
 
 export default ListOrder;

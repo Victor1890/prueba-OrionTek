@@ -81,9 +81,7 @@ const EditOrders = ({ match, history }) => {
                 onChange={(e) =>
                   onSetData("emails", convertStringtoArray(e.target.value))
                 }
-                value={
-                  !data?.emails ? selectedClientById?.emails : data?.emails
-                }
+                value={data.emails ?? selectedClientById?.emails}
               />
             </div>
 
